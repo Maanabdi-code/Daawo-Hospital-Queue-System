@@ -1,0 +1,1102 @@
+/* ===========================================
+   DAAWO HOSPITAL
+   SMART QUEUE MANAGEMENT SYSTEM
+   PROFESSIONAL CSS
+=========================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body{
+    background:#f4f8fc;
+    color:#333;
+    min-height:100vh;
+}
+
+/* ==========================
+   CONTAINER
+========================== */
+
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:40px auto;
+    background:#fff;
+    border-radius:18px;
+    padding:35px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+/* ==========================
+   HEADINGS
+========================== */
+
+h1{
+    font-size:38px;
+    color:#0d6efd;
+    margin-bottom:10px;
+}
+
+h2{
+    color:#0d6efd;
+    margin-bottom:20px;
+}
+
+h3{
+    color:#333;
+    margin:20px 0 15px;
+}
+
+p{
+    color:#666;
+    line-height:1.7;
+}
+
+/* ==========================
+   LOGO
+========================== */
+
+.logo{
+    width:120px;
+    display:block;
+    margin:0 auto 20px;
+}
+
+/* ==========================
+   BUTTONS
+========================== */
+
+button,
+.btn{
+
+    background:#0d6efd;
+    color:white;
+
+    border:none;
+
+    padding:12px 28px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+    transition:.3s;
+}
+
+button:hover,
+.btn:hover{
+
+    background:#0b5ed7;
+
+    transform:translateY(-2px);
+
+    box-shadow:0 8px 15px rgba(13,110,253,.3);
+
+}
+
+/* ==========================
+   INPUTS
+========================== */
+
+input,
+select,
+textarea{
+
+    width:100%;
+
+    padding:12px;
+
+    margin-top:8px;
+
+    margin-bottom:18px;
+
+    border:1px solid #d6d6d6;
+
+    border-radius:8px;
+
+    outline:none;
+
+    font-size:15px;
+
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+
+    border:1px solid #0d6efd;
+
+    box-shadow:0 0 5px rgba(13,110,253,.25);
+
+}
+
+/* ==========================
+   TABLE
+========================== */
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    margin-top:20px;
+
+    background:white;
+
+}
+
+table th{
+
+    background:#0d6efd;
+
+    color:white;
+
+    padding:14px;
+
+    text-align:center;
+
+}
+
+table td{
+
+    padding:12px;
+
+    border:1px solid #ddd;
+
+    text-align:center;
+
+}
+
+table tr:nth-child(even){
+
+    background:#f8f9fa;
+
+}
+
+table tr:hover{
+
+    background:#eef5ff;
+
+}
+
+/* ==========================
+   LINKS
+========================== */
+
+a{
+
+    text-decoration:none;
+
+}
+
+/* ==========================
+   CARDS
+========================== */
+
+.card{
+
+    background:white;
+
+    border-radius:15px;
+
+    padding:20px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+/* ==========================
+   ALERTS
+========================== */
+
+.success{
+
+    background:#d1e7dd;
+
+    color:#0f5132;
+
+    padding:12px;
+
+    border-radius:8px;
+
+    margin:15px 0;
+
+}
+
+.error{
+
+    background:#f8d7da;
+
+    color:#842029;
+
+    padding:12px;
+
+    border-radius:8px;
+
+    margin:15px 0;
+
+}
+
+.warning{
+
+    background:#fff3cd;
+
+    color:#664d03;
+
+    padding:12px;
+
+    border-radius:8px;
+
+    margin:15px 0;
+
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media(max-width:768px){
+
+.container{
+
+width:95%;
+
+padding:20px;
+
+}
+
+table{
+
+display:block;
+
+overflow-x:auto;
+
+}
+
+button{
+
+width:100%;
+
+margin-top:10px;
+
+}
+
+}   
+
+
+/* ===========================================
+   HOME PAGE
+=========================================== */
+
+.home-page{
+
+    background:linear-gradient(135deg,#0d6efd,#4da3ff);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    min-height:100vh;
+
+}
+
+/* Home Card */
+
+.home-container{
+
+    width:700px;
+
+    background:white;
+
+    padding:50px;
+
+    border-radius:20px;
+
+    text-align:center;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.18);
+
+}
+
+/* Logo */
+
+.home-container .logo{
+
+    width:130px;
+
+    height:130px;
+
+    object-fit:contain;
+
+    margin-bottom:20px;
+
+}
+
+/* Titles */
+
+.home-container h1{
+
+    font-size:42px;
+
+    color:#0d6efd;
+
+    margin-bottom:10px;
+
+}
+
+.home-container h2{
+
+    color:#444;
+
+    font-size:26px;
+
+    margin-bottom:20px;
+
+}
+
+.home-container p{
+
+    font-size:18px;
+
+    color:#666;
+
+    margin-bottom:35px;
+
+}
+
+/* Buttons Area */
+
+.buttons{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:20px;
+
+    margin-top:20px;
+
+}
+
+/* Links */
+
+.buttons a{
+
+    text-decoration:none;
+
+}
+
+/* Buttons */
+
+.buttons button{
+
+    width:100%;
+
+    padding:16px;
+
+    font-size:17px;
+
+    border-radius:10px;
+
+    font-weight:bold;
+
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+.home-container{
+
+width:95%;
+
+padding:30px;
+
+}
+
+.buttons{
+
+grid-template-columns:1fr;
+
+}
+
+} 
+
+/* ===========================================
+   PATIENT REGISTER PAGE
+=========================================== */
+
+.form-page{
+
+    background:linear-gradient(135deg,#0d6efd,#4da3ff);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    min-height:100vh;
+
+    padding:40px;
+
+}
+
+.form-container{
+
+    width:100%;
+    max-width:520px;
+
+    background:#fff;
+
+    padding:45px;
+
+    border-radius:20px;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.18);
+
+    text-align:center;
+
+}
+
+.form-container .logo{
+
+    width:110px;
+
+    height:110px;
+
+    object-fit:contain;
+
+    margin:0 auto 15px;
+
+}
+
+.form-container h2{
+
+    font-size:34px;
+
+    color:#0d6efd;
+
+    margin-bottom:10px;
+
+}
+
+.form-subtitle{
+
+    color:#666;
+
+    font-size:16px;
+
+    margin-bottom:30px;
+
+}
+
+.input-group{
+
+    margin-bottom:18px;
+
+}
+
+.input-group input{
+
+    width:100%;
+
+    padding:15px;
+
+    border:1px solid #d9d9d9;
+
+    border-radius:10px;
+
+    font-size:16px;
+
+    transition:.3s;
+
+}
+
+.input-group input:focus{
+
+    border-color:#0d6efd;
+
+    box-shadow:0 0 10px rgba(13,110,253,.2);
+
+}
+
+.btn-primary{
+
+    width:100%;
+
+    padding:15px;
+
+    background:#0d6efd;
+
+    color:white;
+
+    border:none;
+
+    border-radius:10px;
+
+    font-size:17px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.btn-primary:hover{
+
+    background:#0b5ed7;
+
+    transform:translateY(-2px);
+
+    box-shadow:0 10px 20px rgba(13,110,253,.25);
+
+}
+
+@media(max-width:768px){
+
+.form-container{
+
+padding:30px;
+
+}
+
+.form-container h2{
+
+font-size:28px;
+
+}
+
+} 
+
+/*=========================================
+PATIENT DASHBOARD
+=========================================*/
+
+/* .patient-dashboard{
+    background:linear-gradient(135deg,#0d6efd,#4da3ff);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:40px 20px;
+}
+
+.patient-container{
+    width:100%;
+    max-width:950px;
+    background:#fff;
+    border-radius:20px;
+    padding:40px;
+    box-shadow:0 15px 40px rgba(0,0,0,.15);
+}
+
+.patient-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+}
+
+.patient-header h2{
+    color:#0d6efd;
+    margin:0;
+}
+
+.logout-btn{
+    background:#dc3545;
+    color:#fff;
+    padding:10px 22px;
+    border-radius:8px;
+    font-weight:bold;
+}
+
+.logout-btn:hover{
+    background:#bb2d3b;
+}
+
+.patient-logo{
+    width:120px;
+    display:block;
+    margin:0 auto 20px;
+}
+
+.notification-box{
+    background:#fff3cd;
+    color:#856404;
+    border-left:5px solid #ffc107;
+    padding:15px;
+    border-radius:10px;
+    margin-bottom:25px;
+}
+
+.dashboard-card{
+    background:#f8fbff;
+    border-radius:15px;
+    padding:25px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+.dashboard-card h3{
+    margin-bottom:15px;
+    color:#0d6efd;
+}
+
+.dashboard-card select{
+    width:100%;
+    padding:14px;
+    border:1px solid #ddd;
+    border-radius:8px;
+    margin-bottom:20px;
+}
+
+.dashboard-buttons{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+    margin-top:20px;
+}
+
+.dashboard-buttons a{
+    flex:1;
+    min-width:180px;
+}
+
+.dashboard-buttons button{
+    width:100%;
+    padding:14px;
+    border-radius:8px;
+    font-size:16px;
+    font-weight:bold;
+}
+
+.queue-btn{
+    background:#0d6efd;
+}
+
+.notification-btn{
+    background:#198754;
+}
+
+.status-btn{
+    background:#6f42c1;
+}
+
+@media(max-width:768px){
+
+.patient-container{
+    padding:20px;
+}
+
+.patient-header{
+    flex-direction:column;
+    gap:15px;
+}
+
+.dashboard-buttons{
+    flex-direction:column;
+}
+
+.dashboard-buttons a{
+    width:100%;
+}
+
+} */
+
+
+/* ==========================================
+   PATIENT DASHBOARD
+========================================== */
+
+.container{
+    width:90%;
+    max-width:1000px;
+    margin:40px auto;
+    background:#fff;
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.10);
+}
+
+.container .logo{
+    width:120px;
+    display:block;
+    margin:0 auto 25px;
+}
+
+.container h2{
+    color:#0d6efd;
+    font-size:32px;
+    margin-bottom:25px;
+}
+
+.container h3{
+    font-size:24px;
+    color:#333;
+    margin-bottom:15px;
+}
+
+.container select{
+    width:100%;
+    padding:15px;
+    border:1px solid #d9d9d9;
+    border-radius:10px;
+    font-size:16px;
+    margin-bottom:20px;
+}
+
+.container button{
+    background:#0d6efd;
+    color:#fff;
+    border:none;
+    border-radius:8px;
+    padding:14px 30px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.container button:hover{
+    background:#0b5ed7;
+}
+
+.container a{
+    text-decoration:none;
+    color:#0d6efd;
+    font-weight:bold;
+}
+
+.container a:hover{
+    color:#084298;
+}
+
+/* View Queue Status Link */
+
+.container > a:first-of-type{
+    display:inline-block;
+    margin-top:25px;
+    margin-bottom:20px;
+    background:#6f42c1;
+    color:#fff;
+    padding:14px 28px;
+    border-radius:8px;
+    transition:.3s;
+}
+
+.container > a:first-of-type:hover{
+    background:#5b35a8;
+}
+
+/* Notifications Button */
+
+.container a:nth-of-type(2) button{
+    background:#198754;
+}
+
+.container a:nth-of-type(2) button:hover{
+    background:#157347;
+}
+
+/* Logout Button */
+
+.container a:nth-of-type(3) button{
+    background:#dc3545;
+}
+
+.container a:nth-of-type(3) button:hover{
+    background:#bb2d3b;
+}
+
+/* Notification Box */
+
+.container div[style]{
+    border-left:5px solid #ffc107 !important;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+.container{
+    width:95%;
+    padding:20px;
+}
+
+.container button{
+    width:100%;
+}
+
+.container > a:first-of-type{
+    width:100%;
+    text-align:center;
+}
+
+} 
+
+/* ============================
+   PATIENT PAGES BACKGROUND
+============================ */
+
+body{
+    background:linear-gradient(135deg,#0d6efd,#56a5ff);
+    min-height:100vh;
+}
+
+/* Center Card */
+
+.container{
+
+    max-width:1000px;
+
+    margin:70px auto;
+
+    background:#fff;
+
+    border-radius:22px;
+
+    padding:40px;
+
+    box-shadow:0 20px 45px rgba(0,0,0,.18);
+
+}
+
+/* Logo */
+
+.logo{
+
+    width:110px;
+
+    display:block;
+
+    margin:0 auto 25px;
+
+}
+
+/* Heading */
+
+.container h2{
+
+    color:#0d6efd;
+
+    font-size:30px;
+
+    margin-bottom:25px;
+
+}
+
+/* Department */
+
+.container h3{
+
+    margin-bottom:15px;
+
+}
+
+/* Select */
+
+.container select{
+
+    width:100%;
+
+    padding:14px;
+
+    border-radius:10px;
+
+    border:1px solid #ddd;
+
+    margin-bottom:20px;
+
+}
+
+/* Buttons */
+
+.container button{
+
+    min-width:180px;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    border-radius:10px;
+
+    transition:.3s;
+
+}
+
+.container button:hover{
+
+    transform:translateY(-3px);
+
+}  
+
+
+/* ==========================================
+   DOCTOR DASHBOARD
+========================================== */
+
+body{
+    background:linear-gradient(135deg,#0d6efd,#58a6ff);
+    min-height:100vh;
+}
+
+.container{
+    max-width:1100px;
+    margin:40px auto;
+    background:#fff;
+    border-radius:22px;
+    padding:35px;
+    box-shadow:0 15px 40px rgba(0,0,0,.15);
+}
+
+.container h2{
+    color:#0d6efd;
+    font-size:42px;
+    margin-bottom:30px;
+}
+
+/* Statistics Cards */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
+    margin-bottom:40px;
+}
+
+.card{
+    background:#fff;
+    border-radius:18px;
+    padding:25px;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+    transition:.3s;
+    min-height:150px;
+}
+
+.card:hover{
+    transform:translateY(-6px);
+}
+
+.card h3{
+    font-size:30px;
+    color:#333;
+    margin-bottom:15px;
+}
+
+.card h2{
+    font-size:48px;
+    color:#0d6efd;
+    margin:0;
+}
+
+/* Waiting Patients */
+
+.container h3{
+    font-size:34px;
+    margin:25px 0;
+    color:#222;
+}
+
+/* Table */
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    overflow:hidden;
+    border-radius:15px;
+    background:#fff;
+    box-shadow:0 6px 20px rgba(0,0,0,.08);
+}
+
+table th{
+    background:#0d6efd;
+    color:#fff;
+    padding:18px;
+    font-size:18px;
+}
+
+table td{
+    padding:18px;
+    text-align:center;
+    font-size:17px;
+}
+
+table tr:nth-child(even){
+    background:#f8fbff;
+}
+
+table tr:hover{
+    background:#eef6ff;
+}
+
+/* Call Button */
+
+table button{
+    background:#0d6efd;
+    padding:12px 28px;
+    border-radius:10px;
+    font-weight:bold;
+}
+
+table button:hover{
+    background:#0b5ed7;
+}
+
+/* Logout */
+
+div[style*="text-align:right"]{
+    margin-top:25px !important;
+}
+
+div[style*="text-align:right"] button{
+    background:#dc3545 !important;
+    padding:12px 35px !important;
+    border-radius:10px !important;
+    font-size:16px;
+    font-weight:bold;
+}
+
+div[style*="text-align:right"] button:hover{
+    background:#bb2d3b !important;
+}
+
+/* Responsive */
+
+@media(max-width:900px){
+
+.stats{
+    grid-template-columns:1fr;
+}
+
+.container{
+    width:95%;
+    padding:20px;
+}
+
+table{
+    display:block;
+    overflow-x:auto;
+}
+
+.container h2{
+    font-size:30px;
+}
+
+.card h2{
+    font-size:38px;
+}
+
+}
