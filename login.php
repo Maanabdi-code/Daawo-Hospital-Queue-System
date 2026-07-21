@@ -1,73 +1,88 @@
+
+
+
+
+
 <?php
+
+
 session_start();
 include("../includes/db.php");
 
-if(isset($_POST['login']))
-{
+
+
+
+if(isset($_POST['login'])){
+
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $sql = "SELECT * FROM doctors
+    $sql = "SELECT * FROM patients
             WHERE email='$email'
             AND password='$password'";
 
-    $result = mysqli_query($conn,$sql);
+    $result = mysqli_query($conn, $sql);
 
-    if(mysqli_num_rows($result) > 0)
-    {
-        $row = mysqli_fetch_assoc($result);
+    
 
-        $_SESSION['doctor_id'] = $row['id'];
-        $_SESSION['doctor_name'] = $row['fullname'];
-        $_SESSION['department_id'] = $row['department_id'];
+    if(mysqli_num_rows($result) > 0){
 
-        header("Location: dashboard.php");
-        exit();
-    }
-    else
-    {
-        echo "<script>alert('Invalid Login');</script>";
-    }
+    $row = mysqli_fetch_assoc($result);
+
+    $_SESSION['patient_id'] = $row['id'];
+    $_SESSION['fullname'] = $row['fullname'];
+
+    header("Location: dashboard.php");
+    exit();
+
+}else{
+
+    echo "<script>alert('Invalid Email or Password');</script>";
+
+}
 }
 ?>
-
 
 <!DOCTYPE html>
 <html>
 <head>
-<title>Doctor Login</title>
-<link rel="stylesheet" href="../assets/css/style.css">
+    <title>Patient Login</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
+
 <body class="form-page">
+
 
 <div class="form-container">
 
-<h2>Doctor Login</h2>
+    <img src="../assets/images/logo.png" class="logo">
+      
 
-<form method="POST">
+    <h2>Patient Login</h2>
 
-<input type="email"
-name="email"
-placeholder="Email"
-required>
+    <form method="POST">
 
-<br><br>
+        <input type="email"
+               name="email"
+               placeholder="Email Address"
+               required>
 
-<input type="password"
-name="password"
-placeholder="Password"
-required>
+        <br><br>
 
-<br><br>
+        <input type="password"
+               name="password"
+               placeholder="Password"
+               required>
 
-<button type="submit"
-name="login">
-Login
-</button>
+        <br><br>
 
-</form>
+        <button type="submit"
+                name="login">
+                Login
+        </button>
+
+    </form>
 
 </div>
 
 </body>
-</html>

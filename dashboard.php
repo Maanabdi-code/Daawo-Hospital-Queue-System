@@ -2,156 +2,125 @@
 session_start();
 include("../includes/db.php");
 
-if (!isset($_SESSION['doctor_id'])) {
+if(!isset($_SESSION['patient_id'])){
     header("Location: login.php");
     exit();
 }
 
-$doctor_name = $_SESSION['doctor_name'];
-$department_id = $_SESSION['department_id'];
-$doctor_id = $_SESSION['doctor_id'];
+$fullname = $_SESSION['fullname'];
+$patient_id = $_SESSION['patient_id'];
 
-// Soo qaad department-ka doctor-ka
-$getDoctor = mysqli_query($conn,
-"SELECT department_id
-FROM doctors
-WHERE id='$doctor_id'");
-
-$d = mysqli_fetch_assoc($getDoctor);
-$department_id = $d['department_id'];
-
-$waiting_query = mysqli_query($conn,
-"SELECT COUNT(*) AS total
-FROM tickets
-WHERE department_id='$department_id'
-AND status='Waiting'");
-
-$waiting = mysqli_fetch_assoc($waiting_query);
-$waiting_total = $waiting['total'];
-
-$serving_query = mysqli_query($conn,
-"SELECT COUNT(*) AS total
-FROM tickets
-WHERE department_id='$department_id'
-AND status='Serving'");
-
-$serving = mysqli_fetch_assoc($serving_query);
-$serving_total = $serving['total'];
-
-$completed_query = mysqli_query($conn,
-"SELECT COUNT(*) AS total
-FROM tickets
-WHERE department_id='$department_id'
-AND status='Completed'");
-
-$completed = mysqli_fetch_assoc($completed_query);
-$completed_total = $completed['total'];
-
-$sql = "
-SELECT tickets.*, patients.fullname
-FROM tickets
-INNER JOIN patients
-ON tickets.patient_id = patients.id
-WHERE tickets.department_id='$department_id'
-AND (tickets.status='Waiting' OR tickets.status='Serving')
-ORDER BY
-CASE
-WHEN tickets.status='Serving' THEN 0
-ELSE 1
-END,
-tickets.queue_position ASC
+$notification_sql = "
+SELECT *
+FROM notifications
+WHERE patient_id='$patient_id'
+ORDER BY id DESC
+LIMIT 1
 ";
 
-$result = mysqli_query($conn, $sql);
+$notification_result = mysqli_query($conn, $notification_sql);
+
+if(!isset($_SESSION['patient_id'])){
+    header("Location: login.php");
+    exit();
+}
+
+$fullname = $_SESSION['fullname'];
+$patient_id = $_SESSION['patient_id'];
+
+$sql_notification =
+"SELECT *
+ FROM notifications
+ WHERE patient_id='$patient_id'
+ ORDER BY id DESC
+ LIMIT 1";
+
+$result_notification =
+mysqli_query($conn,$sql_notification);
+
+$notification =
+mysqli_fetch_assoc($result_notification);
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Doctor Dashboard</title>
+    <title>Patient Dashboard</title>
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
+<?php
+if($notification)
+{
+?>
+<script>
+alert("<?php echo $notification['message']; ?>");
+</script>
+<?php
+}
+?>
 
 <div class="container">
 
-    <h2>Welcome Dr. <?php echo $doctor_name; ?></h2>
+    <img src="../assets/images/logo.png" class="logo">
 
-    <div class="stats">
-
-        <div class="card">
-            <h3>Waiting</h3>
-            <h2><?php echo $waiting_total; ?></h2>
-        </div>
-
-        <div class="card">
-            <h3>Serving</h3>
-            <h2><?php echo $serving_total; ?></h2>
-        </div>
-
-        <div class="card">
-            <h3>Completed</h3>
-            <h2><?php echo $completed_total; ?></h2>
-        </div>
-
+    <h2>Welcome, <?php echo $fullname; ?></h2>
+    <?php
+if(mysqli_num_rows($notification_result) > 0)
+{
+    $notification = mysqli_fetch_assoc($notification_result);
+?>
+    <div
+    style="
+    background:#fff3cd;
+    color:#856404;
+    padding:15px;
+    border:1px solid #ffeeba;
+    border-radius:8px;
+    margin-bottom:20px;
+    ">
+        <strong>Notification:</strong><br>
+        <?php echo $notification['message']; ?>
     </div>
+<?php
+}
+?>
 
-    <h3>Waiting Patients</h3>
+    <h3>Select Department</h3>
 
-    <table border="1" cellpadding="10">
-        <tr>
-            <th>Patient Name</th>
-            <th>Ticket Number</th>
-            <th>Queue Position</th>
-            <th>Status</th>
-            <th>Action</th>
-        </tr>
+    <form action="book_ticket.php" method="POST">
 
-        <?php while($row = mysqli_fetch_assoc($result)) { ?>
+        <select name="department_id" required>
+            <option value="">Choose Department</option>
+            <option value="1">General Medicine</option>
+            <option value="2">Dental Clinic</option>
+            <option value="3">Children's Clinic</option>
+            <option value="4">Emergency</option>
+        </select>
 
-        <tr>
-            <td><?php echo $row['fullname']; ?></td>
-            <td><?php echo $row['ticket_number']; ?></td>
-            <td><?php echo $row['queue_position']; ?></td>
-            <td><?php echo $row['status']; ?></td>
-            <td>
+        <br><br>
 
-                <?php if($row['status'] == 'Waiting') { ?>
+        <button type="submit" name="book">
+            Take Queue Ticket
+        </button>
 
-                    <a href="call_patient.php?id=<?php echo $row['id']; ?>">
-                        <button>Call</button>
-                    </a>
+    </form>
 
-                <?php } else { ?>
+    <br>
 
-                    -
+<a href="queue_status.php">View My Queue Status</a>
 
-                <?php } ?>
+<br><br>
 
-            </td>
-        </tr>
+<a href="notifications.php">
+    <button>Notifications</button>
+</a>
 
-        <?php } ?>
+<br><br>
 
-    </table>
-
-    <div style="text-align:right; margin-top:20px;">
-
-        <a href="logout.php">
-            <button style="
-                background:#dc3545;
-                color:white;
-                border:none;
-                padding:10px 20px;
-                border-radius:8px;
-                cursor:pointer;
-                font-weight:bold;
-            ">
-                Logout
-            </button>
-        </a>
-
-    </div>
+<a href="logout.php">
+    <button>Logout</button>
+</a>
 
 </div>
 
