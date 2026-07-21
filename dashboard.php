@@ -2,118 +2,158 @@
 session_start();
 include("../includes/db.php");
 
-if (!isset($_SESSION['admin_id'])) {
+if (!isset($_SESSION['doctor_id'])) {
     header("Location: login.php");
     exit();
 }
 
-$sql = "SELECT * FROM doctors";
+$doctor_name = $_SESSION['doctor_name'];
+$department_id = $_SESSION['department_id'];
+$doctor_id = $_SESSION['doctor_id'];
+
+// Soo qaad department-ka doctor-ka
+$getDoctor = mysqli_query($conn,
+"SELECT department_id
+FROM doctors
+WHERE id='$doctor_id'");
+
+$d = mysqli_fetch_assoc($getDoctor);
+$department_id = $d['department_id'];
+
+$waiting_query = mysqli_query($conn,
+"SELECT COUNT(*) AS total
+FROM tickets
+WHERE department_id='$department_id'
+AND status='Waiting'");
+
+$waiting = mysqli_fetch_assoc($waiting_query);
+$waiting_total = $waiting['total'];
+
+$serving_query = mysqli_query($conn,
+"SELECT COUNT(*) AS total
+FROM tickets
+WHERE department_id='$department_id'
+AND status='Serving'");
+
+$serving = mysqli_fetch_assoc($serving_query);
+$serving_total = $serving['total'];
+
+$completed_query = mysqli_query($conn,
+"SELECT COUNT(*) AS total
+FROM tickets
+WHERE department_id='$department_id'
+AND status='Completed'");
+
+$completed = mysqli_fetch_assoc($completed_query);
+$completed_total = $completed['total'];
+
+$sql = "
+SELECT tickets.*, patients.fullname
+FROM tickets
+INNER JOIN patients
+ON tickets.patient_id = patients.id
+WHERE tickets.department_id='$department_id'
+AND (tickets.status='Waiting' OR tickets.status='Serving')
+ORDER BY
+CASE
+WHEN tickets.status='Serving' THEN 0
+ELSE 1
+END,
+tickets.queue_position ASC
+";
+
 $result = mysqli_query($conn, $sql);
 ?>
 
 <!DOCTYPE html>
 <html>
-
 <head>
-    <title>Admin Dashboard</title>
+    <title>Doctor Dashboard</title>
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
-
 <body>
 
+<div class="container">
 
+    <h2>Welcome Dr. <?php echo $doctor_name; ?></h2>
 
-    <div class="container">
+    <div class="stats">
 
-        <h2>Admin Dashboard</h2>
-
-        <a href="add_doctor.php">
-            <button>Add New Doctor</button>
-        </a>
-
-
-
-        <br><br>
-
-        <table border="1" cellpadding="10">
-
-            <tr>
-                <th>Doctor Name</th>
-                <th>Department ID</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
-
-            <?php
-            while ($row = mysqli_fetch_assoc($result)) {
-            ?>
-
-                <tr>
-
-                    <td><?php echo $row['fullname']; ?></td>
-
-                    <td><?php echo $row['department_id']; ?></td>
-
-                    <td><?php echo $row['status']; ?></td>
-
-                    <td>
-
-                        <a href="edit_doctor.php?id=<?php echo $row['id']; ?>">
-                            <button>Edit</button>
-                        </a>
-
-                        <a href="delete_doctor.php?id=<?php echo $row['id']; ?>"
-                            onclick="return confirm('Are you sure you want to delete this doctor?');">
-                            <button>Delete</button>
-                        </a>
-
-                        <?php if ($row['status'] == "Active") { ?>
-
-                            <a href="change_doctor_status.php?id=<?php echo $row['id']; ?>&status=Inactive">
-                                <button>Deactivate</button>
-                            </a>
-
-                        <?php } else { ?>
-
-                            <a href="change_doctor_status.php?id=<?php echo $row['id']; ?>&status=Active">
-                                <button>Activate</button>
-                            </a>
-
-                        <?php } ?>
-
-                    </td>
-
-                </tr>
-
-            <?php
-            }
-            ?>
-
-        </table>
-        <br><br>
-
-        <a href="daily_report.php">
-            <button>Daily Report</button>
-        </a>
-        <div style="text-align:right; margin-top:20px;">
-
-            <a href="logout.php">
-                <button style="
-            background:#dc3545;
-            color:white;
-            border:none;
-            padding:10px 20px;
-            border-radius:8px;
-            cursor:pointer;
-            font-weight:bold;
-        ">
-                    Logout
-                </button>
-            </a>
-
+        <div class="card">
+            <h3>Waiting</h3>
+            <h2><?php echo $waiting_total; ?></h2>
         </div>
+
+        <div class="card">
+            <h3>Serving</h3>
+            <h2><?php echo $serving_total; ?></h2>
+        </div>
+
+        <div class="card">
+            <h3>Completed</h3>
+            <h2><?php echo $completed_total; ?></h2>
+        </div>
+
     </div>
 
-</body>
+    <h3>Waiting Patients</h3>
 
+    <table border="1" cellpadding="10">
+        <tr>
+            <th>Patient Name</th>
+            <th>Ticket Number</th>
+            <th>Queue Position</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+
+        <?php while($row = mysqli_fetch_assoc($result)) { ?>
+
+        <tr>
+            <td><?php echo $row['fullname']; ?></td>
+            <td><?php echo $row['ticket_number']; ?></td>
+            <td><?php echo $row['queue_position']; ?></td>
+            <td><?php echo $row['status']; ?></td>
+            <td>
+
+                <?php if($row['status'] == 'Waiting') { ?>
+
+                    <a href="call_patient.php?id=<?php echo $row['id']; ?>">
+                        <button>Call</button>
+                    </a>
+
+                <?php } else { ?>
+
+                    -
+
+                <?php } ?>
+
+            </td>
+        </tr>
+
+        <?php } ?>
+
+    </table>
+
+    <div style="text-align:right; margin-top:20px;">
+
+        <a href="logout.php">
+            <button style="
+                background:#dc3545;
+                color:white;
+                border:none;
+                padding:10px 20px;
+                border-radius:8px;
+                cursor:pointer;
+                font-weight:bold;
+            ">
+                Logout
+            </button>
+        </a>
+
+    </div>
+
+</div>
+
+</body>
 </html>
